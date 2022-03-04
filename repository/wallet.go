@@ -87,13 +87,16 @@ func (w *WalletRepository) UpdateOrCreate(ctx context.Context, amount float64) (
 	if err != sql.ErrNoRows {
 		return nil, err
 	}
+	if amount < 0 {
+		return nil, ErrInsufficientBalance
+	}
 	//if no row, create wallet record
 	timeNow := utils.TimeNow()
-	_, err = w.db.ExecContext(ctx, createStatement, id, timeNow, timeNow, 0.0)
+	_, err = w.db.ExecContext(ctx, createStatement, id, timeNow, timeNow, amount)
 	if err != nil {
 		return nil, err
 	}
 
-	return &model.Wallet{Base: model.Base{ID: id, CreatedAt: timeNow, UpdatedAt: timeNow}}, nil
+	return &model.Wallet{Base: model.Base{ID: id, CreatedAt: timeNow, UpdatedAt: timeNow}, Balance: amount}, nil
 
 }

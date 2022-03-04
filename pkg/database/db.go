@@ -20,7 +20,7 @@ type Config struct {
 
 var tables = []string{
 	`CREATE TABLE kola_transactions (
-		id VARCHAR(20) PRIMARY KEY NOT NULL,
+		id VARCHAR(50) PRIMARY KEY NOT NULL,
 		created_at timestamp with time zone NOT NULL DEFAULT current_timestamp,
 		updated_at timestamp with time zone NOT NULL DEFAULT current_timestamp,
 		deleted_at timestamp with time zone DEFAULT NULL,
@@ -28,7 +28,7 @@ var tables = []string{
 		status text NOT NULL DEFAULT 'pending'
 	)`,
 	`CREATE TABLE kola_wallets (
-		id VARCHAR(20) PRIMARY KEY NOT NULL,
+		id VARCHAR(50) PRIMARY KEY NOT NULL,
 		created_at timestamp with time zone NOT NULL DEFAULT current_timestamp,
 		updated_at timestamp with time zone NOT NULL DEFAULT current_timestamp,
 		deleted_at timestamp with time zone DEFAULT NULL,
