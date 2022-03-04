@@ -1,0 +1,25 @@
+syntax="proto3";
+
+package grpc;
+
+option go_package = "./transaction";
+
+service Wallet {
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+  rpc UpdateBalance(UpdateBalanceRequest) returns (UpdateBalanceResponse);
+}
+
+message GetBalanceRequest {
+}
+
+message GetBalanceResponse {
+  double Balance = 1;
+}
+
+message UpdateBalanceRequest {
+  double Amount = 1;
+}
+
+message UpdateBalanceResponse {
+  double Balance = 1;
+}
