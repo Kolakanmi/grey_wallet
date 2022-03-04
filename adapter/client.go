@@ -12,7 +12,7 @@ import (
 
 type Config struct {
 	Address string `envconfig:"GRPC_ADDRESS" default:"localhost"`
-	Port    int    `envconfig:"GRPC_PORT" default:"9090"`
+	Port    int    `envconfig:"GRPC_PORT" default:"9091"`
 }
 
 func LoadConfig() *Config {
