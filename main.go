@@ -35,11 +35,11 @@ func main() {
 	repo := repository.NewWalletRepository(db)
 	walletService := service.NewWalletService(repo)
 
-	walletServer := adapter.NewWalletServer(walletService)
+	// walletServer := adapter.NewWalletServer(walletService)
 
 	adapterConfig := adapter.LoadConfig()
 
-	proto.RegisterWalletServer(grpcServer, walletServer)
+	proto.RegisterWalletServer(grpcServer, walletService)
 
 	address := fmt.Sprintf("%s:%d", adapterConfig.Address, adapterConfig.Port)
 	l, err := net.Listen("tcp", address)

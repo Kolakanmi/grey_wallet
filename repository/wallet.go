@@ -3,7 +3,6 @@ package repository
 import (
 	"context"
 	"database/sql"
-	"errors"
 	"math"
 	"time"
 
@@ -21,8 +20,6 @@ type IWalletRepository interface {
 type WalletRepository struct {
 	db *sql.DB
 }
-
-var ErrInsufficientBalance = errors.New("insufficient balance")
 
 var (
 	getStatement = `
@@ -72,7 +69,7 @@ func (w *WalletRepository) UpdateOrCreate(ctx context.Context, amount float64) (
 	err := row.Scan(&wallet.ID, &wallet.CreatedAt, &wallet.UpdatedAt, &wallet.Balance)
 	if err == nil {
 		if amount < 0 && wallet.Balance < math.Abs(amount) {
-			return nil, ErrInsufficientBalance
+			return nil, model.ErrInsufficientBalance
 		}
 		//update balance
 		err = w.db.QueryRowContext(ctx, updateStatement, amount, time.Now()).
@@ -86,7 +83,7 @@ func (w *WalletRepository) UpdateOrCreate(ctx context.Context, amount float64) (
 		return nil, err
 	}
 	if amount < 0 {
-		return nil, ErrInsufficientBalance
+		return nil, model.ErrInsufficientBalance
 	}
 	//if no row, create wallet record
 	return w.Create(ctx, amount)

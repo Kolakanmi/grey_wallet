@@ -3,7 +3,7 @@ module github.com/Kolakanmi/grey_wallet
 go 1.15
 
 require (
-	github.com/Kolakanmi/grey_transaction v0.0.0-20220304115316-c75604328c77
+	github.com/Kolakanmi/grey_transaction v0.0.0-20220305000627-f914c68da263
 	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/mux v1.8.0
 	github.com/kelseyhightower/envconfig v1.4.0
